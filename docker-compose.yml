@@ -1,0 +1,23 @@
+version: "2"
+services:
+  angular:
+    build: ./FrontEndYb
+    ports:
+      - "8085:4200"
+    links:
+      - app
+  app:
+    container_name: app
+    restart: always
+    build: ./BackEndYb
+    ports:
+      - "3011:3011"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
